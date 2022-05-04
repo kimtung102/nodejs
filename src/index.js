@@ -14,6 +14,9 @@ const __dirname = dirname(__filename);
 //http logger
 app.use(morgan("combined"))
 
+//static file
+app.use(express.static(path.join(__dirname,'public/')))
+
 //view engine
 app.engine('hbs', engine({extname: 'hbs'}));
 app.set('view engine', 'hbs');
