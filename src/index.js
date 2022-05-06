@@ -5,12 +5,16 @@ import path from 'path'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import route from './routes/route.js';
+import connect from './config/db/config.js'
 
 const app = express()
 const port = 3001
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+//connect to DB
+connect()
 
 //http logger
 app.use(morgan("combined"))
@@ -21,13 +25,15 @@ app.use(express.static(path.join(__dirname, 'public/')))
 //view engine
 app.engine('hbs', engine({ extname: 'hbs' }));
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'resources/views'));
+app.set('views', path.join(__dirname, 'resources', 'views')); //'resources/views'
 
 //Routes
 route(app)
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
   res.render('home')
 })
 
-app.listen(port)
+app.listen(port, () =>
+  console.log(`App listening at http://localhost:${port}`)
+)

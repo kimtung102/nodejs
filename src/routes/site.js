@@ -5,7 +5,7 @@ const siteRouter = express.Router()
 const controller = new SiteController
 
 
-siteRouter.use('/search', controller.search)
-siteRouter.use('/', controller.home)
+siteRouter.get('/search', controller.search)
+siteRouter.get('/', controller.home)
 
 export default siteRouter

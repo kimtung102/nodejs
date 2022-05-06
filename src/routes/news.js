@@ -8,6 +8,6 @@ const controller = new NewsController
 
 
 // '/' de cuoi
-newsRouter.use('/',controller.index)
+newsRouter.get('/',controller.index)
 
 export default newsRouter
