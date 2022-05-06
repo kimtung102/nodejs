@@ -4,6 +4,7 @@ import { engine } from 'express-handlebars'
 import path from 'path'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import route from './routes/route.js';
 
 const app = express()
 const port = 3001
@@ -15,15 +16,18 @@ const __dirname = dirname(__filename);
 app.use(morgan("combined"))
 
 //static file
-app.use(express.static(path.join(__dirname,'public/')))
+app.use(express.static(path.join(__dirname, 'public/')))
 
 //view engine
-app.engine('hbs', engine({extname: 'hbs'}));
+app.engine('hbs', engine({ extname: 'hbs' }));
 app.set('view engine', 'hbs');
-app.set('views',path.join(__dirname,'resources/views'));
+app.set('views', path.join(__dirname, 'resources/views'));
 
-app.get('/', (req, res) => {
-  res.render('home');
+//Routes
+route(app)
+
+app.get('/',(req,res)=>{
+  res.render('home')
 })
 
 app.listen(port)
