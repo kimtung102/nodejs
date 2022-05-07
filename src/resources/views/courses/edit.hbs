@@ -1,0 +1,19 @@
+<div class="row justify-content-center mt-5">
+    <div class="col-lg-5">
+        <form method="post" action="/courses/{{this._id}}?_method=PUT">
+            <div class="mb-3">
+                <label for="name" class="form-label">Title</label>
+                <input value="{{this.name}}" type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description">{{this.des}}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="videoid" class="form-label">VideoID</label>
+                <input value="{{this.videoid}}" type="text" class="form-control" id="videoid" name="videoid">
+            </div>
+            <button type="submit" class="btn btn-primary">Sửa</button>
+        </form>
+    </div>
+</div>

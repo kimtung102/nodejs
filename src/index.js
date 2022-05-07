@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import route from './routes/route.js';
 import connect from './config/db/config.js'
+import methodOverride from 'method-override';
 
 const app = express()
 const port = 3001
@@ -18,15 +19,20 @@ connect()
 
 //http logger
 app.use(morgan("combined"))
-
+app.use(methodOverride('_method'))
 //static file
 app.use(express.static(path.join(__dirname, 'public/')))
-app.use(express.urlencoded({extended: true,}));
+app.use(express.urlencoded({ extended: true, }));
 
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 //view engine
-app.engine('hbs', engine({ extname: 'hbs' }));
+app.engine('hbs', engine({
+  extname: 'hbs',
+  helpers: {
+    sum: (a,b) => a+b,
+  },
+}));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views')); //'resources/views'
 

@@ -1,0 +1,31 @@
+<div class="container">
+    <h2 class="my-4">Khóa học của tôi</h2>
+    <table class="table">
+        <thead class="text-center">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">VideoID</th>
+                <th scope="col">Slug</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            {{#each courses}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.des}}</td>
+                <td>{{this.videoid}}</td>
+                <td>{{this.slug}}</td>
+                <td>
+                    <a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</a>
+                    <a href="#" class="btn btn-link">Xóa</a>
+                </td>
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+</div>

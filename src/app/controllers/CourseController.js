@@ -24,6 +24,19 @@ class CourseController {
         course.save()
         res.send('saved!')
     }
+    //[Get] /course/:id/edit
+    edit(req, res, next) {
+        Course.findById(req.params.id)
+            .then(course => res.render('courses/edit', handleMongooseData(course)))
+            .catch(next)
+    }
+
+    //[Put] /course/:id
+    update(req, res, next) {
+        Course.updateOne({ _id: req.params.id},req.body)
+        .then(()=> res.redirect('/me/stored/courses'))
+        .catch(next)
+    }
 }
 
 export { CourseController }
