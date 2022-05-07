@@ -21,7 +21,10 @@ app.use(morgan("combined"))
 
 //static file
 app.use(express.static(path.join(__dirname, 'public/')))
+app.use(express.urlencoded({extended: true,}));
 
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
 //view engine
 app.engine('hbs', engine({ extname: 'hbs' }));
 app.set('view engine', 'hbs');
@@ -29,10 +32,6 @@ app.set('views', path.join(__dirname, 'resources', 'views')); //'resources/views
 
 //Routes
 route(app)
-
-app.get('/', (req, res) => {
-  res.render('home')
-})
 
 app.listen(port, () =>
   console.log(`App listening at http://localhost:${port}`)
