@@ -1,14 +1,18 @@
 import mongoose from "mongoose";
+import slug from 'mongoose-slug-generator'
+
 
 const Schema = mongoose.Schema;
-const ObjectId = Schema.ObjectId;
+mongoose.plugin(slug)
 
 const Course = new Schema({
-    title: String,
+    name: String,
     description: String,
-    image: String,
-    createdDate: {type:Date, default: Date.now},
-    modifiedDate: {type:Date, default: null},
-})
+    videoid: String,
+    slug: { type: String, slug: 'name', unique: true },
+    },
+    {
+        timestamps: true,
+    })
 
 export default mongoose.model('Course', Course)

@@ -1,19 +1,17 @@
 import Course from "../models/Course.js"
+import { handleMongooseArray, handleMongooseData } from '../../util/mongoose.js'
 class SiteController {
 
     //[GET] /home
-    home(req, res) {
-        // const course = new Course()
-        // Course.find({}, function (err, docs) {
-        //     docs.forEach(element => {
-                
-        //         console.log(element);
-        //     });
-        //   });
-        res.render('home')
+    home(req, res, next) {
+        Course.find({})
+            .then(courses => {
+                res.render('home', { courses: handleMongooseArray(courses) }) //just handlebars problem
+            })
+            .catch(next)
     }
 
-    search(req,res) {
+    search(req, res) {
         res.render('search')
     }
 }
